@@ -1,0 +1,46 @@
+.register{
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:  url("https://m.media-amazon.com/images/I/61c7f06bHbL.jpg");
+    background-size: cover;object-fit: cover;
+    
+}
+ .registerTitle{
+    font-size: 50px;
+ }
+ .registerFrom{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column ;
+ }
+ .registerFrom > label{
+    margin: 10px 0;
+ } 
+ .registerInput {
+    padding: 10px;
+    background-color: white;
+    border: none; 
+ }
+ .registerButton {
+    margin-top:20px;
+    cursor: pointer;
+    background-color: teal;
+    border: none;
+    flood-color: white  ;
+    border-radius: 10px;
+    padding: 10px;
+ }
+ .registerLoginButton{
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: lightcoral;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+ }
