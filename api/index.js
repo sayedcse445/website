@@ -4,6 +4,7 @@ const dotenv=require("dotenv")
 const mongoose=require("mongoose")
 const authRouter = require("./routes/auth")
 const userRouter = require("./routes/usre")
+const postRouter =require("./routes/post")
 
 dotenv.config()
 app.use(express.json())
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_URL,{
 
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
+app.use("/api/post",postRouter)
 
 app.listen("4000",()=>{
     console.log("backend is connected");
