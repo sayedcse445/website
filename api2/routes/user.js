@@ -25,22 +25,26 @@ router.put("/:id", async (req, res) => {
 
 
 //Delete
-// router.delete('/:Id', async (req, res) => {
+// router.delete("/:userId", async (req, res) => {
 //     try {
-//       const postId = req.params.postId;
-  
-//       // Find the post and delete it
-//       const deletedPost = await Post.findByIdAndDelete(postId);
-//       if (!deletedPost) {
-//         return res.status(404).json({ message: 'Post not found' });
-//       }
-  
-//       return res.status(200).json({ message: 'Post deleted successfully' });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ message: 'Internal server error' });
+//         const userId = req.params.userId;
+        
+//         // Perform any additional authorization checks here before proceeding
+        
+//         const deletedUser = await User.findByIdAndDelete(userId);
+//         if (!deletedUser) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         // Also, consider deleting related posts or other associated data if necessary
+        
+//         res.status(200).json({ message: 'User deleted successfully' });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ message: 'Internal server error' });
 //     }
-//   });
+// });
+
 
 
 
@@ -65,14 +69,62 @@ router.delete("/:id", async (req, res) => {
     })
 
 
-    //GET USER
-    router.get("/:id",async(req,res)=>{
-        try{
 
-        }catch(err){
-            res.status(500).json(err)
+//GET USER
+
+router.get('/:id', async (req, res) => {
+    try {
+        const userId = req.params.id; // Get the user id from the URL parameter
+
+        // Find user by id
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
-    })
+
+        // Update user's username and email
+        if (req.query.username) {
+            user.username = req.query.username;
+        }
+        if (req.query.email) {
+            user.email = req.query.email;
+        }
+
+        // Save the updated user
+        await user.save();
+
+        res.status(200).json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const userId = req.params.id; // Get the user id from the URL parameter
+
+//         // Find user by id
+//         const user = await User.findById(userId);
+
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         // Filter out sensitive information
+//         const safeUser = {
+//             username: user.username,
+//             email: user.email
+//         };
+
+//         res.status(200).json(safeUser);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// });
 
 
 module.exports = router
+
+
